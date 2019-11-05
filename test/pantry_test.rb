@@ -37,10 +37,10 @@ class PantryTest < Minitest::Test
 
   def test_enough_ingredients_for_method
     @pantry.restock(@cheese, 5)
-    assert_equal false, @pantry.enough_ingredients_for?(mac_and_cheese)
+    assert_equal false, @pantry.enough_ingredients_for?(@mac_and_cheese)
     @pantry.restock(@mac, 5)
-    assert_equal false, @pantry.enough_ingredients_for?(mac_and_cheese)
+    assert_equal false, @pantry.enough_ingredients_for?(@mac_and_cheese)
     @pantry.restock(@mac, 3)
-    assert_equal true, @pantry.enough_ingredients_for?(mac_and_cheese)
+    assert_equal true, @pantry.enough_ingredients_for?(@mac_and_cheese)
   end
 end
