@@ -2,10 +2,11 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/ingredient'
+require_relative '../lib/recipe.rb'
 
-class IngredientTest < Minitest::Test 
+class RecipeTest < Minitest::Test 
   def setup
-    @cheese = Ingredient.new("Cheese", "oz", 50)
+    @cheese = Ingredient.new("Cheese", "oz", 100)
     @mac = Ingredient.new("Macaroni", "oz", 30)
     @mac_and_cheese = Recipe.new("Mac and Cheese")
   end
@@ -19,14 +20,17 @@ class IngredientTest < Minitest::Test
   end
 
   def test_it_starts_with_no_ingredients_required
-    assert_equal {}, @mac_and_cheese.ingredients_required
+    expected = {}
+    assert_equal expected, @mac_and_cheese.ingredients_required
   end
 
   def test_add_ingredient_method
+    expected1 = {@cheese => 2}
+    expected2 = {@cheese => 2, @mac => 8}
     @mac_and_cheese.add_ingredient(@cheese, 2)
-    assert_equal {@cheese => 2}, @mac_and_cheese.ingredients_required
+    assert_equal expected1, @mac_and_cheese.ingredients_required
     @mac_and_cheese.add_ingredient(@mac, 8)
-    assert_equal {@cheese => 2, @mac => 8}, @mac_and_cheese.ingredients_required
+    assert_equal expected2, @mac_and_cheese.ingredients_required
   end
 
   def test_amount_required_method
